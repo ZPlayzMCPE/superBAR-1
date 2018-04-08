@@ -10,7 +10,7 @@ class HUD
 {
 
     const NO_PLUG = CLR::RED . 'NoPlugin' . CLR::RESET;
-    const FORMAT_TREE = ['%NICK%', '%MONEY%', '%FACTION%', '%ITEM_ID%', '%ITEM_META%', '%TIME%', '%ONLINE%', '%MAX_ONLINE%', '%X%', '%Y%', '%Z%', '%IP%', '%PP_GROUP%', '%TAG%', '%LOAD%', '%TPS%', '%KILLS%', '%DEATHS%', '%LEVEL%', '%GT%', '%AGT%'];
+    const FORMAT_TREE = ['%NICK%', '%MONEY%', '%FACTION%', '%ITEM_ID%', '%ITEM_META%', '%TIME%', '%ONLINE%', '%MAX_ONLINE%', '%X%', '%Y%', '%Z%', '%IP%', '%PP_GROUP%', '%TAG%', '%LOAD%', '%TPS%', '%KILLS%', '%DEATHS%', '%LEVEL%', '%GT%', '%AGT%, %Next_Rank%, %Rank_Price%'];
 
     /** @var \pocketmine\plugin\Plugin[] */
     private $plugins = [];
@@ -66,6 +66,9 @@ class HUD
 
         if (strpos($format, '%GT%') === false && strpos($format, '%AGT%') === false)
             $plugins['GameTime'] = false;
+        
+        if (strpos($format, '%Next_Rank%') === false && strpos($format, '%Rank_Price%') === false)
+            $plugin['RankUp'] = false;
 
         $pp_data = $this->settings['pp'];
         $ppInUse = false;
@@ -90,7 +93,7 @@ class HUD
      */
     public function processHUD(Server $server)
     {
-        $faction = $pp_group = $money = $kills = $deaths = $session_time = $all_time = HUD::NO_PLUG;
+        $faction = $pp_group = $money = $kills = $deaths = $session_time = $all_time = $next_rank = $rank_price = HUD::NO_PLUG;
         $load = $server->getTickUsage();
         $tps = $server->getTicksPerSecond();
         $playersOnline = count($players = $server->getOnlinePlayers());
@@ -151,7 +154,12 @@ class HUD
                     $session_time = $plugins['GameTime']->getSessionTime($name, '%i%:%s%');
                     $all_time = $plugins['GameTime']->getAllTime($name, '%H%:%i%:%s%');
                 }
-
+                
+                if ($plugins['RankUp']) {
+                    $next_rank = $plugins['RankUp']->getNextRank($name);
+                    $rank_price = $plugins['RankUp']->getPrice($name);
+                }
+                
                 if (($inv = $p->getInventory()) !== null) {
                     $item = $inv->getItemInHand();
                     $id = $item->getId();
@@ -170,7 +178,7 @@ class HUD
                 $tag = $p->getNameTag();
                 $level = $p->getLevel()->getName();
 
-                $replace = [$name, $money, $faction, $id, $meta, $date, $playersOnline, $maxOnline, $x, $y, $z, $ip, $pp_group, $tag, $load, $tps, $kills, $deaths, $level, $session_time, $all_time];
+                $replace = [$name, $money, $faction, $id, $meta, $date, $playersOnline, $maxOnline, $x, $y, $z, $ip, $pp_group, $tag, $load, $tps, $kills, $deaths, $level, $session_time, $all_time, $next_rank, $rank_price];
 
                 $text = str_replace($ftree, $replace, $format);
 
