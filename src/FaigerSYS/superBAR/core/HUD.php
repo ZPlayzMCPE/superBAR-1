@@ -156,7 +156,7 @@ class HUD
                 }
                 
                 if ($plugins['RankUp']) {
-                    $next_rank = $plugins['RankUp']->getRankStore()->getNextRank($name);
+                    $next_rank = $plugins['RankUp']->getRankStore()->getRankByName($name);
                     $rank_price = $plugins['RankUp']->getRank()->getPrice($name);
                 }
                 
