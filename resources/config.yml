@@ -29,7 +29,9 @@ hud-format: "Hello, %NICK%\nOnline: %ONLINE%/%MAX_ONLINE%"
 #   If not, or if there are any problems, install modified version of KillChat: https://github.com/FaigerSYS/superBAR_additionally/raw/master/KillChat_MOD.phar
 # %LEVEL% - name of player's current world/level
 # %GT% / %AGT% - player's duration of session / total time of the game
-#   NEED GameTime. You can download it here: https://github.com/FaigerSYS/GameTime/releases/latest
+#   NEED GameTime. You can download it here: https://github.com/FaigerSYS/GameTime/releases/latest\
+# %NEXT_RANK% - Next rank to rankup to.
+# %RANK_PRICE% - Rankup Price.
 # \n - new line. WARNING! \n is not the same as /n
 
 #The level of the HUD shift. Set the variable for example at 30.
