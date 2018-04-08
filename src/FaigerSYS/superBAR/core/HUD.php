@@ -68,7 +68,7 @@ class HUD
             $plugins['GameTime'] = false;
         
         if (strpos($format, '%Next_Rank%') === false && strpos($format, '%Rank_Price%') === false)
-            $plugin['RankUp'] = false;
+            $plugins['RankUp'] = false;
 
         $pp_data = $this->settings['pp'];
         $ppInUse = false;
