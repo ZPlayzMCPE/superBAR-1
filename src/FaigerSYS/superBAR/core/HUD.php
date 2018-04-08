@@ -157,7 +157,7 @@ class HUD
                 
                 if ($plugins['RankUp']) {
                     $next_rank = $plugins['RankUp']->getRankStore()->getRankByName($name);
-                    $rank_price = $plugins['RankUp']->getRank()->getPrice($name);
+                    $rank_price = $plugins['RankUp']->getPrice($name);
                 }
                 
                 if (($inv = $p->getInventory()) !== null) {
