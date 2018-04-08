@@ -12,7 +12,7 @@ use pocketmine\utils\TextFormat as CLR;
 
 class Loader extends BaseModule {
 	
-	const PLUGINS = [['EconomyAPI', 'PocketMoney'], 'FactionsPro', 'GameTime', 'PurePerms', ['KillChat', 'ScorePvP']];
+	const PLUGINS = [['EconomyAPI', 'PocketMoney'], 'FactionsPro', 'GameTime', 'PurePerms', ['KillChat', 'ScorePvP', 'RankUp']];
 	
 	/** @var \FaigerSYS\superBAR\controller\DataController */
 	private $data = null;
